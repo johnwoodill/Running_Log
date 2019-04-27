@@ -53,4 +53,4 @@ ggplot(pdat1, aes(x=week_count,  y=miles)) +
   theme(axis.text.x = element_text(angle=45, vjust=1, hjust=1)) +
   NULL
 
-ggsave("figures/mpw_bar.pdf", width = 12, height = 6)
+ggsave("figures/mpw_bar.png", width = 12, height = 6)
