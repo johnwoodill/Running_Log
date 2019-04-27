@@ -27,7 +27,9 @@ run_dat = run_dat.sort_values("date")
 
 run_dat.to_csv("data/run_log.csv", index=False)
 
-subprocess.run(["git commit -a -m " + "new run"], shell=True)
+commit_message = "adding run"
 
+subprocess.run('git commit -a -m "adding run"', shell=True)
+subprocess.run("git push origin master")
 
 print("Saved data/run_log.csv")
