@@ -1,5 +1,6 @@
 import sys
 import pandas as pd
+import subprocess
 
 # Open file
 
@@ -25,6 +26,8 @@ run_dat = pd.concat([run_dat, mdat], sort=False)
 run_dat = run_dat.sort_values("date")
 
 run_dat.to_csv("data/run_log.csv", index=False)
+
+subprocess.run(["git commit -a -m " + "new run"], shell=True)
 
 
 print("Saved data/run_log.csv")
