@@ -1,1 +1,1 @@
-<img align="center" width="800" src="https://github.com/johnwoodill/Running_Log/raw/master/figures/mpw_bar.png?raw=true">
+<img align="center" width="1000" height="500" src="https://github.com/johnwoodill/Running_Log/raw/master/figures/mpw_bar.png?raw=true">
