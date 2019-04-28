@@ -3,6 +3,8 @@ library(lubridate)
 library(ggthemes)
 library(scales)
 
+MILES_2018 <- 200
+
 dat <- read_csv("data/run_log.csv")
 
 dat <- dat %>% 
@@ -40,17 +42,29 @@ head(pdat1)
 
 pdat1$week_count <- factor(pdat1$week_count, levels = pdat1$week_count, labels = pdat1$week_count)
 
+max_mpw <- pdat1 %>% 
+  group_by(week) %>% 
+  summarise(mpw = sum(miles)) %>% 
+  ungroup()
+
+
+
 ggplot(pdat1, aes(x=week_count,  y=miles)) +
   geom_bar(stat="identity", fill="#619CFF") +
   theme_tufte(11) +
   geom_text(data = filter(pdat1, miles > 0), aes(label=round(miles, 2)), vjust=-1) +
+  annotate("text", x=58 , y = (max(pdat1$miles) + 10), label = paste0("2019 Miles: ", sum(pdat1$miles))) +
+  annotate("text", x=58 , y = (max(pdat1$miles) + 9), label = paste0("Max MPW: ", max(max_mpw$mpw))) +
+  annotate("text", x=58 , y = (max(pdat1$miles) + 8), label = paste0("Max Run: ", max(pdat1$miles))) +
+  annotate("text", x=58 , y = (max(pdat1$miles) + 7), label = paste0("Shoe Miles: ", (MILES_2018 + sum(pdat1$miles)))) +
   annotate("segment", x=-Inf, xend=Inf, y=-Inf, yend=-Inf, color = "grey", size=1) + #Bottom
   annotate("segment", x=-Inf, xend=-Inf, y=-Inf, yend=Inf, color = "grey", size=1) + # Left
   annotate("segment", x=Inf, xend=Inf, y=-Inf, yend=Inf, color = "grey", size=1) + # Right
   annotate("segment", x=-Inf, xend=Inf, y=Inf, yend=Inf, color = "grey", size=1) + # Top
   labs(x=NULL, y="MPW") +
-  ylim(0, max(pdat1$miles) + 1) +
+  ylim(0, max(pdat1$miles) + 10) +
   theme(axis.text.x = element_text(angle=45, vjust=1, hjust=1)) +
+  theme(text=element_text(family="Times", size=11)) + #Times New Roman, 12pt, Bold 
   NULL
 
 ggsave("figures/mpw_bar.png", width = 12, height = 6)
