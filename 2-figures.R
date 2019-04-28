@@ -19,7 +19,6 @@ dat$date <- as.Date(dat$date, "%m-%d-%Y")
 dat <- ungroup(dat)
 class(dat$date)
 mdat <- data.frame(date = as.Date(seq(mdy("01-01-2019"), mdy("12-31-2019"), by = "1 day")))
-head(mdat)
 mdat <- left_join(mdat, dat, by = "date")
 mdat$month <- month(mdat$date, label = TRUE)
 mdat$week <- floor_date(mdat$date, unit="week", week_start=1)
@@ -27,7 +26,6 @@ mdat$week <- as.numeric(as.factor(mdat$week))
 mdat$week_count <- paste0(mdat$month, " (W", mdat$week, ")")
 
 
-head(mdat)
 mdat$miles <- replace_na(mdat$miles, 0)
 
 pdat1 <- mdat %>% 
@@ -38,7 +36,6 @@ pdat1 <- mdat %>%
   arrange(week) %>% 
   ungroup()
 
-head(pdat1)
 
 pdat1$week_count <- factor(pdat1$week_count, levels = pdat1$week_count, labels = pdat1$week_count)
 
