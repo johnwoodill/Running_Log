@@ -7,6 +7,8 @@ MILES_2018 <- 200
 
 dat <- read_csv("data/run_log.csv")
 
+write_csv(dat, paste0("data/backup/", Sys.Date(), "_run_log.csv"))
+
 dat <- dat %>% 
   group_by(date) %>% 
   summarise(miles = sum(miles),
