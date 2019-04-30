@@ -32,7 +32,7 @@ run_dat.to_csv("data/run_log.csv", index=False)
 # Because that doesn't make any sense /s
 # subprocess.run("git rm figures/mpw_bar.png", shell=True)
 subprocess.run("Rscript 2-figures.R", shell=True)
-# subprocess.run("git add figures/mpw_bar.png", shell=True)
+subprocess.run("git add figures/mpw_bar.png", shell=True)
 subprocess.run('git commit -a -m "adding run"', shell=True)
 subprocess.run("git push origin master", shell=True)
 
