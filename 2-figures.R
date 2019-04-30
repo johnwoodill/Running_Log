@@ -48,7 +48,7 @@ max_mpw <- pdat1 %>%
 
 
 
-ggplot(pdat1, aes(x=week_count,  y=miles)) +
+mpw_plot <- ggplot(pdat1, aes(x=week_count,  y=miles)) +
   geom_bar(stat="identity", fill="#619CFF") +
   theme_tufte(11) +
   geom_text(data = filter(pdat1, miles > 0), aes(label=round(miles, 2)), vjust=-1) +
@@ -66,4 +66,4 @@ ggplot(pdat1, aes(x=week_count,  y=miles)) +
   theme(text=element_text(family="Times", size=11)) + #Times New Roman, 12pt, Bold 
   NULL
 
-ggsave("figures/mpw_bar.png", width = 12, height = 6)
+ggsave("figures/mpw_bar.png", plot = mpw_plot, width = 12, height = 6)
