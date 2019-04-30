@@ -1,6 +1,7 @@
 import sys
 import pandas as pd
 import subprocess
+import time
 
 # Open file
 
@@ -11,7 +12,7 @@ SHOE_MILES = 160  # From 2018 shoe miles
 # Get arguments
 date = sys.argv[1]
 miles = sys.argv[2]
-time = sys.argv[3]
+run_time = sys.argv[3]
 notes = sys.argv[4]
 
 # date = "asdf"
@@ -19,7 +20,9 @@ notes = sys.argv[4]
 # time = 2
 
 # Build data to merge
-mdat = pd.DataFrame({"date": [date], "miles": [miles], "time": [time], "notes": notes})
+mdat = pd.DataFrame(
+    {"date": [date], "miles": [miles], "time": [run_time], "notes": notes}
+)
 
 run_dat = pd.concat([run_dat, mdat], sort=False)
 
@@ -32,6 +35,9 @@ run_dat.to_csv("data/run_log.csv", index=False)
 # Because that doesn't make any sense /s
 # subprocess.run("git rm figures/mpw_bar.png", shell=True)
 subprocess.run("Rscript 2-figures.R", shell=True)
+
+# Pause to let process run
+time.sleep(5)
 subprocess.run("git add figures/mpw_bar.png", shell=True)
 subprocess.run('git commit -a -m "adding run"', shell=True)
 subprocess.run("git push origin master", shell=True)
