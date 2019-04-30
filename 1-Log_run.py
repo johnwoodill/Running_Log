@@ -28,9 +28,9 @@ run_dat = run_dat.sort_values("date")
 run_dat.to_csv("data/run_log.csv", index=False)
 
 subprocess.run("git add --all", shell=True)
+subprocess.run("git add figures/*", shell=True)
 subprocess.run('git commit -a -m "adding run"', shell=True)
 subprocess.run("git push origin master", shell=True)
-
 subprocess.run("Rscript 2-figures.R", shell=True)
 
 print("Saved data/run_log.csv")
